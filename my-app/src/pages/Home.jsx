@@ -8,15 +8,22 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
+            boletins: [],
             posts: [],
             articles:[],
             news:[],
-            tvs:[]
+            tvs:[],
+            radios:[]
 
         }
     }
     componentDidMount() {
         Promise.all([
+            fetch('http://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    boletins: response
+                })
+            }),
             fetch('https://masnoticia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     posts: response
@@ -36,10 +43,31 @@ class Home extends Component {
                 this.setState({
                     tvs: response
                 })
+            }),
+            fetch('http://coolaruba.com//wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    radios: response
+                })
             })
       ]);
     }
     render() {
+        let boletins = this.state.boletins.map(( boletin, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <div>provider: <a href="https://boletinextra.com">boletinextra.com</a></div>
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={ boletin._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ boletin.title.rendered}</h3>
+                            <p className="card-text">{moment( boletin.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html:  boletin.excerpt.rendered }}></p>
+                            <a href={ boletin.link} target="_blank">read more</a>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         let posts = this.state.posts.map((post, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -105,21 +133,39 @@ class Home extends Component {
                         </div>
                     )
         })
+        let radios = this.state.radios.map((radio, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <div>provider: <a href="http://www.coolaruba.com">coolaruba.com</a></div>
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={radio._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{radio.title.rendered}</h3>
+                            <p className="card-text">{moment(radio.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html: radio.excerpt.rendered }}></p>
+                            <a href={radio.link} target="_blank">read more</a>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         return (
             <div>
              <Navbar />
                 <section className="jumbotron text-center">
                     <div className="container">
-                        <h1 className="jumbotron-heading">Welcome to Aruba Page</h1>
+                        <h1 className="jumbotron-heading">Welcome to ArubaPage.com</h1>
                         <p className="lead text-muted">One Happy Island, One well informed Aruban.</p>
                     </div>
                 </section>
              <div className="container">
               <div className="row">
+                {boletins}
                 {posts}
                 {articles}
                 {news}
                 {tvs}
+                {radios}
               </div>    
              </div>
             </div>
