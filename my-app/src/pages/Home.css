@@ -65,9 +65,9 @@ footer p {
     content:"";
     position: absolute;
     bottom: 9px;
-    width: 5%;
+    width: 77px;
     margin-left: -16px;
-    height: 4px;
+    height: 0.21em;
     background: rgb(255, 208, 0);
     display: block;
 }
