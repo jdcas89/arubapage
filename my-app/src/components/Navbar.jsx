@@ -10,14 +10,14 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="container">
-                    <a className="navbar-brand" href="#"><img src={ require('../images/star.PNG') }/> ArubaPage.com</a>
+                    <a className="navbar-brand" href="/"><img src={ require('../images/star.PNG') }/> ArubaPage.com</a>
                  <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="nav nav-masthead justify-content-center">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                            <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">About</a>
+                            <a className="nav-link" href="/about">About</a>
                         </li>
                     </ul>
                   </div>
