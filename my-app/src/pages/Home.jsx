@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
-import ora from '../images/24ora.jpg' ;
-import logo from '../images/logo.svg';
 import Navbar from '../components/Navbar.jsx';
 import './Home.css';
 
@@ -98,7 +95,7 @@ class Home extends Component {
                     <h3>{ReactHtmlParser(ora.title.rendered)}</h3>
                     <p className="card-text">{moment(ora.date).format('L')}</p>
                     <p dangerouslySetInnerHTML={{ __html: ora.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={ora.link} target="_blank">read more</a>
+                    <a className="btn btn-lg btn-primary" href={ora.link} target="_blank" rel="noopener noreferrer">read more</a>
                     <div className="text-muted">provider: 24ora.com</div>
                         </div>
                     </div>
@@ -114,7 +111,7 @@ class Home extends Component {
                  <h3>{ReactHtmlParser(post.title.rendered)}</h3>
                  <p className="card-text">{moment(post.date).format('L')}</p>
                  <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></p>
-                 <a className="btn btn-lg btn-primary" href={post.link} target="_blank">read more</a>
+                 <a className="btn btn-lg btn-primary" href={post.link} target="_blank" rel="noopener noreferrer">read more</a>
                  <div className="text-muted">provider: masnoticia.com</div>
                    </div>
                  </div>
@@ -130,7 +127,7 @@ class Home extends Component {
                     <h3>{ReactHtmlParser(article.title.rendered)}</h3>
                     <p className="card-text">{moment(article.date).format('L')}</p>
                     <p dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={article.link} target="_blank">read more</a>
+                    <a className="btn btn-lg btn-primary" href={article.link} target="_blank" rel="noopener noreferrer">read more</a>
                     <div className="text-muted">provider: bondia.com</div>
                      </div>
                     </div>
@@ -146,7 +143,7 @@ class Home extends Component {
                         <h3>{ReactHtmlParser(noticia.title.rendered)}</h3>
                         <p className="card-text">{moment(noticia.date).format('L')}</p>
                         <p dangerouslySetInnerHTML={{ __html: noticia.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={noticia.link} target="_blank">read more</a>
+                        <a className="btn btn-lg btn-primary" href={noticia.link} target="_blank" rel="noopener noreferrer">read more</a>
                         <div className="text-muted">provider: diario.aw</div>
                          </div>
                         </div>
@@ -162,7 +159,7 @@ class Home extends Component {
                         <h3>{ReactHtmlParser(native.title.rendered)}</h3>
                         <p className="card-text">{moment(native.date).format('L')}</p>
                         <p dangerouslySetInnerHTML={{ __html: native.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={native.link} target="_blank">read more</a>
+                        <a className="btn btn-lg btn-primary" href={native.link} target="_blank" rel="noopener noreferrer">read more</a>
                         <div className="text-muted">provider: arubanative.com</div>
                          </div>
                         </div>
@@ -178,7 +175,7 @@ class Home extends Component {
                         <h3>{ReactHtmlParser(focus.title.rendered)}</h3>
                         <p className="card-text">{moment(focus.date).format('L')}</p>
                         <p dangerouslySetInnerHTML={{ __html: focus.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={focus.link} target="_blank">read more</a>
+                        <a className="btn btn-lg btn-primary" href={focus.link} target="_blank" rel="noopener noreferrer">read more</a>
                         <div className="text-muted">provider: focus.aw</div>
                             </div>
                         </div>
@@ -194,7 +191,7 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(tv.title.rendered)}</h3>
                             <p className="card-text">{moment(tv.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: tv.excerpt.rendered }}></p>
-                            <a className="btn btn-lg btn-primary" href={tv.link} target="_blank">read more</a>
+                            <a className="btn btn-lg btn-primary" href={tv.link} target="_blank" rel="noopener noreferrer">read more</a>
                             <div className="text-muted">provider: telearuba.aw</div>
                                 </div>
                             </div>
@@ -210,7 +207,7 @@ class Home extends Component {
                     <h3>{ReactHtmlParser(radio.title.rendered)}</h3>
                     <p className="card-text">{moment(radio.date).format('L')}</p>
                     <p dangerouslySetInnerHTML={{ __html: radio.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={radio.link} target="_blank">read more</a>
+                    <a className="btn btn-lg btn-primary" href={radio.link} target="_blank" rel="noopener noreferrer">read more</a>
                     <div className="text-muted">provider: coolaruba.com</div>
                         </div>
                     </div>
@@ -241,8 +238,8 @@ class Home extends Component {
               {radios}
               </div>    
              </div>
-                <footer class="container">
-                    <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank">Site Lift NL</a></div>
+                <footer className="container">
+                    <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank" rel="noopener noreferrer">Site Lift NL</a></div>
                 </footer>
             </div>
         );

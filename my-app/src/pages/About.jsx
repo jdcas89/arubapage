@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
 import moment from 'moment';
-import ora from '../images/24ora.jpg';
 import Navbar from '../components/Navbar.jsx';
 
 class About extends Component {
@@ -55,8 +53,8 @@ return (
                 {boletins}
             </div>    
         </div>
-        <footer class="container">
-            <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank">Site Lift NL</a></div>
+        <footer className="container">
+            <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank" rel="noopener noreferrer">Site Lift NL</a></div>
         </footer>
     </div>
 );

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './Navbar.css';
 
 class Navbar extends Component {
@@ -10,7 +9,7 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="container">
-                    <a className="navbar-brand" href="/"><img src={ require('../images/star.PNG') }/> ArubaPage.com</a>
+                    <a className="navbar-brand" href="/"><img src={require('../images/star.PNG')} alt="Thumbnail [100%x225]"/> ArubaPage.com</a>
                  <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="nav nav-masthead justify-content-center">
                         <li className="nav-item active">
