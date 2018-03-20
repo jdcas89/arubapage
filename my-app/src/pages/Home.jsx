@@ -123,7 +123,7 @@ class Home extends Component {
                         <div className="card-body">
                             <h3>{ReactHtmlParser(awe.title)}</h3>
                             <p className="card-text">{moment(awe.pubDate).format('L')}</p>
-                            <p>Please click riba click 'read more' pa mas over di e topico aki...</p>
+                            <p>Please click riba 'read more' pa mas over di e topico aki...</p>
                             <a className="btn btn-lg btn-primary" href={awe.link} target="_blank">read more</a>
                             <div className="text-muted">provider: awe24.com</div>
                         </div>

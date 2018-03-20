@@ -29,7 +29,7 @@ class About extends Component {
                         <div className="card-body">
                             <h3>{boletin.title.rendered}</h3>
                             <p className="card-text">{moment(boletin.date).format('L')}</p>
-                            <p>It’s finally here, Aruba page dot com! It is with great pleasure that we proudly present to you our solution for the island of Aruba regarding online news. This web app allows you to see all the latest news</p>
+                            <p>It’s finally here, Aruba page dot com! It is with great pleasure that we proudly present to you our solution for the island of Aruba regarding online news. This web app allows you to see all the latest news.</p>
                             <a className="btn btn-lg btn-primary" href={boletin.link} target="_blank">read more</a>
                             <div className="text-muted">provider: sitelift.nl</div>
                         </div>
