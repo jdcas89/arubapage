@@ -8,6 +8,7 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
+            clas:[],
             awes: [],
             arubianos:[],
             maintas:[],
@@ -19,11 +20,17 @@ class Home extends Component {
             news:[],
             natifes:[],
             tvs:[],
+            blekis:[],
             radios:[]
         }
     }
     componentDidMount() {
         Promise.all([
+            fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.noticiacla.com%2Frss').then((response) => response.json()).then(response => {
+                this.setState({
+                    clas: response.items
+                })
+            }),
             fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.awe24.com%2Frss').then((response) => response.json()).then(response => {
                 this.setState({
                     awes: response.items
@@ -79,6 +86,11 @@ class Home extends Component {
                     tvs: response
                 })
             }),
+            fetch('https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    blekis: response
+                })
+            }),
             fetch('http://coolaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     radios: response
@@ -87,6 +99,22 @@ class Home extends Component {
       ]);
     }
     render() {
+        let clas = this.state.clas.map((cla, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={require('../images/noticiaCLa.PNG')} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(cla.title)}</h3>
+                            <p className="card-text">{moment(cla.pubDate).format('L')}</p>
+                            <p>{ReactHtmlParser(cla.description.substring(0, 250) + "...")}</p>
+                            <a className="btn btn-lg btn-primary" href={cla.link} target="_blank">read more</a>
+                            <div className="text-muted">provider: noticiacla.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         let awes = this.state.awes.map((awe, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -247,6 +275,22 @@ class Home extends Component {
                     </div>
                 )
             })
+        let blekis = this.state.blekis.map((bleki, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                    <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={require('../images/batiBleki.PNG')} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(bleki.title.rendered)}</h3>
+                            <p className="card-text">{moment(bleki.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html: bleki.excerpt.rendered.substring(0, 250) + "..."}}></p>
+                            <a className="btn btn-lg btn-primary" href={bleki.link} target="_blank" rel="noopener noreferrer">read more</a>
+                            <div className="text-muted">provider: batibleki.visitaruba.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
             let tvs = this.state.tvs.map((tv, index) => {
                     return (
                         <div className="col-md-4" key={index}>
@@ -294,6 +338,7 @@ class Home extends Component {
               <div className="row">
               {natifes}
               {awes}
+              {clas}
               {articles}
               {boletins}
               {arubianos}
@@ -302,6 +347,7 @@ class Home extends Component {
               {focuses}
               {oras}
               {tvs}
+              {blekis}
               {posts}
               {radios}
               </div>    
