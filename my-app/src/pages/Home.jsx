@@ -8,6 +8,9 @@ class Home extends Component {
     constructor() {
         super();
         this.state = {
+            awes: [],
+            arubianos:[],
+            maintas:[],
             oras: [],
             boletins: [],
             posts: [],
@@ -17,11 +20,25 @@ class Home extends Component {
             natifes:[],
             tvs:[],
             radios:[]
-
         }
     }
     componentDidMount() {
         Promise.all([
+            fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.awe24.com%2Frss').then((response) => response.json()).then(response => {
+                this.setState({
+                    awes: response.items
+                })
+            }),
+            fetch('http://earubianonews.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    arubianos: response
+                })
+            }),
+            fetch('https://awemainta.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    maintas: response
+                })
+            }),
             fetch('http://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     oras: response
@@ -70,6 +87,54 @@ class Home extends Component {
       ]);
     }
     render() {
+        let awes = this.state.awes.map((awe, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={awe.enclosure.link} onError={(e) => { e.target.src = require('../images/awe.PNG') }} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(awe.title)}</h3>
+                            <p className="card-text">{moment(awe.pubDate).format('L')}</p>
+                            <p>Please click riba click 'read more' pa mas over di e topico aki...</p>
+                            <a className="btn btn-lg btn-primary" href={awe.link} target="_blank">read more</a>
+                            <div className="text-muted">provider: awe24.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+        let arubianos = this.state.arubianos.map((arubiano, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={require('../images/eArubiano.PNG')} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(arubiano.title.rendered)}</h3>
+                            <p className="card-text">{moment(arubiano.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html: arubiano.excerpt.rendered.substring(0, 250) + "..."}}></p>
+                            <a className="btn btn-lg btn-primary" href={arubiano.link} target="_blank">read more</a>
+                            <div className="text-muted">provider: earubianonews.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+        let maintas = this.state.maintas.map((mainta, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={undefined ? mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url : require('../images/aweMainta.PNG') } alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(mainta.title.rendered)}</h3>
+                            <p className="card-text">{moment(mainta.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html: mainta.excerpt.rendered }}></p>
+                            <a className="btn btn-lg btn-primary" href={mainta.link} target="_blank">read more</a>
+                            <div className="text-muted">provider: awemainta.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
         let boletins = this.state.boletins.map((boletin, index) => {
             return ( 
                 <div className="col-md-4" key={index}>
@@ -106,7 +171,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                  <div className="card mb-4 box-shadow">
-                 <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={ !undefined ? post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url : require('../images/masnoticia.PNG') } alt="Thumbnail [100%x225]" />
+                 <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={ undefined ? post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url : require('../images/masnoticia.PNG') } alt="Thumbnail [100%x225]" />
                  <div className="card-body"> 
                  <h3>{ReactHtmlParser(post.title.rendered)}</h3>
                  <p className="card-text">{moment(post.date).format('L')}</p>
@@ -228,13 +293,16 @@ class Home extends Component {
              <div className="container">
               <div className="row">
               {natifes}
+              {awes}
               {articles}
-              {focuses}
               {boletins}
-              {posts}
+              {arubianos}
               {news}
+              {maintas}
+              {focuses}
               {oras}
               {tvs}
+              {posts}
               {radios}
               </div>    
              </div>
