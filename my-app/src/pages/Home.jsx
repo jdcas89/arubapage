@@ -119,7 +119,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                     <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={awe.enclosure.link} onError={(e) => { e.target.src = require('../images/awe.PNG') }} alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(awe.enclosure.length > 0) ? awe.enclosure.link : require('../images/awe.PNG')  } onError={(e) => { e.target.src=require('../images/awe.PNG') }} alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                             <h3>{ReactHtmlParser(awe.title)}</h3>
                             <p className="card-text">{moment(awe.pubDate).format('L')}</p>
