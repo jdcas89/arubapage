@@ -247,7 +247,7 @@ class Home extends Component {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={native._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(native._embedded['wp:featuredmedia'][0].code) ? require('../images/arubaNative.PNG') : native._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url}  alt="Thumbnail [100%x225]" />
                         <div className="card-body"> 
                         <h3>{ReactHtmlParser(native.title.rendered)}</h3>
                         <p className="card-text">{moment(native.date).format('L')}</p>
