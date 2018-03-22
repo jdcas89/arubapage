@@ -9,7 +9,6 @@ class Home extends Component {
         super();
         this.state = {
             clas:[],
-            awes: [],
             arubianos:[],
             maintas:[],
             oras: [],
@@ -27,11 +26,6 @@ class Home extends Component {
             fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.noticiacla.com%2Frss').then((response) => response.json()).then(response => {
                 this.setState({
                     clas: response.items
-                })
-            }),
-            fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.awe24.com%2Frss').then((response) => response.json()).then(response => {
-                this.setState({
-                    awes: response.items
                 })
             }),
             fetch('https://earubianonews.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
@@ -98,22 +92,6 @@ class Home extends Component {
                             <p>{ReactHtmlParser(cla.description.substring(0, 250) + "...")}</p>
                             <a className="btn btn-lg btn-primary" href={cla.link} target="_blank">read more</a>
                             <div className="text-muted">provider: noticiacla.com</div>
-                        </div>
-                    </div>
-                </div>
-            )
-        })
-        let awes = this.state.awes.map((awe, index) => {
-            return (
-                <div className="col-md-4" key={index}>
-                    <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(awe.enclosure.length > 0) ? awe.enclosure.link : require('../images/awe.PNG')  } onError={(e) => { e.target.src=require('../images/awe.PNG') }} alt="Thumbnail [100%x225]" />
-                        <div className="card-body">
-                            <h3>{ReactHtmlParser(awe.title)}</h3>
-                            <p className="card-text">{moment(awe.pubDate).format('L')}</p>
-                            <p>Please click riba 'read more' pa mas over di e topico aki...</p>
-                            <a className="btn btn-lg btn-primary" href={awe.link} target="_blank">read more</a>
-                            <div className="text-muted">provider: awe24.com</div>
                         </div>
                     </div>
                 </div>
@@ -293,7 +271,6 @@ class Home extends Component {
              <div className="container">
               <div className="row">
               {natifes}
-              {awes}
               {posts}
               {clas}
               {boletins}
