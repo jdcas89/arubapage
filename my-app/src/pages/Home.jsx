@@ -15,11 +15,9 @@ class Home extends Component {
             oras: [],
             boletins: [],
             posts: [],
-            articles:[],
             focuses:[],
             news:[],
             natifes:[],
-            tvs:[],
             blekis:[],
             radios:[]
         }
@@ -36,7 +34,7 @@ class Home extends Component {
                     awes: response.items
                 })
             }),
-            fetch('http://earubianonews.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://earubianonews.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     arubianos: response
                 })
@@ -46,27 +44,22 @@ class Home extends Component {
                     maintas: response
                 })
             }),
-            fetch('http://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     oras: response
                 })
             }),
-            fetch('http://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     boletins: response
                 })
             }),
-            fetch('http://www.masnoticia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://www.masnoticia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     posts: response
                 })
             }),
-            fetch('http://www.bondia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    articles: response
-                })
-            }),
-            fetch('http://www.diario.aw/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://www.diario.aw/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     news: response
                 })
@@ -81,17 +74,12 @@ class Home extends Component {
                     natifes: response
                 })
             }),
-            fetch('http://www.telearuba.aw/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    tvs: response
-                })
-            }),
             fetch('https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     blekis: response
                 })
             }),
-            fetch('http://coolaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://coolaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     radios: response
                 })
@@ -151,7 +139,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                     <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={undefined ? mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url : require('../images/aweMainta.PNG') } alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(mainta._embedded['wp:featuredmedia'] === undefined) ? require('../images/aweMainta.PNG') : mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                             <h3>{ReactHtmlParser(mainta.title.rendered)}</h3>
                             <p className="card-text">{moment(mainta.date).format('L')}</p>
@@ -199,7 +187,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                  <div className="card mb-4 box-shadow">
-                 <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={ undefined ? post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url : require('../images/masnoticia.PNG') } alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(post._embedded['wp:featuredmedia'][0].code) ?  require('../images/masnoticia.PNG') : post._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } alt="Thumbnail [100%x225]" />
                  <div className="card-body"> 
                  <h3>{ReactHtmlParser(post.title.rendered)}</h3>
                  <p className="card-text">{moment(post.date).format('L')}</p>
@@ -208,22 +196,6 @@ class Home extends Component {
                  <div className="text-muted">provider: masnoticia.com</div>
                    </div>
                  </div>
-                </div>
-            )
-        })
-        let articles = this.state.articles.map((article, index) => {
-            return (
-                <div className="col-md-4" key={index}>
-                    <div className="card mb-4 box-shadow">
-                    <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={article._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
-                    <div className="card-body"> 
-                    <h3>{ReactHtmlParser(article.title.rendered)}</h3>
-                    <p className="card-text">{moment(article.date).format('L')}</p>
-                    <p dangerouslySetInnerHTML={{ __html: article.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={article.link} target="_blank" rel="noopener noreferrer">read more</a>
-                    <div className="text-muted">provider: bondia.com</div>
-                     </div>
-                    </div>
                 </div>
             )
         })
@@ -291,22 +263,6 @@ class Home extends Component {
                 </div>
             )
         })
-            let tvs = this.state.tvs.map((tv, index) => {
-                    return (
-                        <div className="col-md-4" key={index}>
-                            <div className="card mb-4 box-shadow">
-                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={tv._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
-                            <div className="card-body">
-                            <h3>{ReactHtmlParser(tv.title.rendered)}</h3>
-                            <p className="card-text">{moment(tv.date).format('L')}</p>
-                            <p dangerouslySetInnerHTML={{ __html: tv.excerpt.rendered }}></p>
-                            <a className="btn btn-lg btn-primary" href={tv.link} target="_blank" rel="noopener noreferrer">read more</a>
-                            <div className="text-muted">provider: telearuba.aw</div>
-                                </div>
-                            </div>
-                        </div>
-                    )
-        })
         let radios = this.state.radios.map((radio, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -338,17 +294,15 @@ class Home extends Component {
               <div className="row">
               {natifes}
               {awes}
+              {posts}
               {clas}
-              {articles}
               {boletins}
-              {arubianos}
               {news}
+              {arubianos}
               {maintas}
               {focuses}
               {oras}
-              {tvs}
               {blekis}
-              {posts}
               {radios}
               </div>    
              </div>
