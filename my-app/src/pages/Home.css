@@ -49,10 +49,6 @@ footer p {
     margin-bottom: 0;
 }
 
-.nav-masthead{
-        float: right;
-}
-
 .nav-masthead .nav-link {
     font-weight: 700;
     color: rgba(255, 255, 255, .5);
@@ -92,4 +88,9 @@ footer p {
     .nav-masthead {
         float: right;
     }
+}
+.social a, i{
+    color:white;
+    margin-left:10px;
+    margin-top: 12px;
 }
