@@ -8,6 +8,7 @@ class About extends Component {
         super();
         this.state = {
             boletins: [],
+            instagrams: []
         }
     }
     componentDidMount() {
@@ -15,6 +16,11 @@ class About extends Component {
             fetch('https://sitelift.nl/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     boletins: response
+                })
+            }),
+            fetch('https://api.instagram.com/oembed/?url=http://instagr.am/p/Bgoyxryg-eD/').then((response) => response.json()).then(response => {
+                this.setState({
+                    instagrams: [response]
                 })
             })
         ]);
@@ -37,6 +43,20 @@ class About extends Component {
                 </div>
             )
         })
+        let instagrams = this.state.instagrams.map((instagram, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={instagram.thumbnail_url} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <p>{instagram.title}</p>
+                            <a className="btn btn-lg btn-primary" href={instagram.author_url} target="_blank">Go to Instagram page</a>
+                            <div className="text-muted">provider: @arubapage</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
 return (
     <div>
         <Navbar />
@@ -51,6 +71,7 @@ return (
         <div className="container">
             <div className="row">
                 {boletins}
+                {instagrams}
             </div>    
         </div>
         <footer className="container">
