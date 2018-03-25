@@ -8,7 +8,8 @@ class About extends Component {
         super();
         this.state = {
             boletins: [],
-            instagrams: []
+            instagrams: [],
+            twitters:[],
         }
     }
     componentDidMount() {
@@ -16,6 +17,11 @@ class About extends Component {
             fetch('https://sitelift.nl/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     boletins: response
+                })
+            }),
+            fetch('https://cors-anywhere.herokuapp.com/https://publish.twitter.com/oembed?url=https://twitter.com/arubapage/status/977901243275403265').then((response) => response.json()).then(response => {
+                this.setState({
+                    twitters: [response]
                 })
             }),
             fetch('https://api.instagram.com/oembed/?url=http://instagr.am/p/Bgoyxryg-eD/').then((response) => response.json()).then(response => {
@@ -57,6 +63,20 @@ class About extends Component {
                 </div>
             )
         })
+        let twitters = this.state.twitters.map((twitter, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={require('../images/twitterPage.PNG')} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <p dangerouslySetInnerHTML={{ __html: twitter.html }}></p>
+                            <a className="btn btn-lg btn-primary" href={twitter.author_url} target="_blank">Go to @arubapage on Twitter</a>
+                            <div className="text-muted">provider: @arubapage</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
 return (
     <div>
         <Navbar />
@@ -72,6 +92,7 @@ return (
             <div className="row">
                 {boletins}
                 {instagrams}
+                {twitters}
             </div>    
         </div>
         <footer className="container">

@@ -25,6 +25,9 @@ class Navbar extends Component {
                         <li className="nav-item">
                                 <div className="social"><a href="https://www.instagram.com/arubapage/" target="_blank" rel="noopener noreferrer" ><i className="fa fa-instagram fa-lg"></i></a></div>
                         </li>
+                        <li className="nav-item">
+                                <div className="social"><a href="https://www.twitter.com/arubapage/" target="_blank" rel="noopener noreferrer" ><i className="fa fa-twitter fa-lg"></i></a></div>
+                        </li>
                     </ul>
                   </div>
                 </div>
