@@ -12,13 +12,16 @@ class Navbar extends Component {
             <span className="navbar-toggler-icon"></span>
             </button>
                  <div className="collapse navbar-collapse" id="navbarCollapse">
-                    <ul className="nav nav-masthead justify-content-center">
+                        <ul className="nav nav-masthead justify-content-center">
                         <li className="nav-item active">
                             <div><Link className="nav-link" to="/">Home</Link></div>
                         </li>
                         <li>
                             <div><Link className="nav-link" to="/about">About</Link></div>
                         </li>
+                        </ul>
+                        <div className="social nav nav-masthead ml-md-auto">
+                            
                         <li className="nav-item">
                                 <div className="social"><a href="https://www.facebook.com/ArubaPage-562896297429688/" target="_blank" rel="noopener noreferrer" ><i className="fa fa-facebook-square fa-lg"></i></a></div>
                         </li>
@@ -28,7 +31,7 @@ class Navbar extends Component {
                         <li className="nav-item">
                                 <div className="social"><a href="https://www.twitter.com/arubapage/" target="_blank" rel="noopener noreferrer" ><i className="fa fa-twitter fa-lg"></i></a></div>
                         </li>
-                    </ul>
+                        </div>
                   </div>
                 </div>
             </nav>

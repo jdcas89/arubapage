@@ -94,3 +94,10 @@ footer p {
     margin-left:10px;
     margin-top: 12px;
 }
+.social a,
+i:hover{
+    color: rgb(255, 208, 0);
+}
+.nav{
+    display: inline-flex !important;
+}
