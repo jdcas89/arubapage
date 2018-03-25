@@ -15,6 +15,7 @@ class Home extends Component {
             boletins: [],
             posts: [],
             focuses:[],
+            bondias:[],
             news:[],
             natifes:[],
             blekis:[],
@@ -71,6 +72,11 @@ class Home extends Component {
             fetch('https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     blekis: response
+                })
+            }),
+            fetch('https://www.bondia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+                this.setState({
+                    bondias: response
                 })
             }),
             fetch('https://coolaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
@@ -209,6 +215,22 @@ class Home extends Component {
                     </div>
                 )
             })
+        let bondias = this.state.bondias.map((bondia, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                    <div className="card mb-4 box-shadow">
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={bondia._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                        <div className="card-body">
+                            <h3>{ReactHtmlParser(bondia.title.rendered)}</h3>
+                            <p className="card-text">{moment(bondia.date).format('L')}</p>
+                            <p dangerouslySetInnerHTML={{ __html: bondia.excerpt.rendered }}></p>
+                            <a className="btn btn-lg btn-primary" href={bondia.link} target="_blank" rel="noopener noreferrer">read more</a>
+                            <div className="text-muted">provider: bondia.com</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
             let focuses = this.state.focuses.map((focus, index) => {
                 return (
                     <div className="col-md-4" key={index}>
@@ -274,6 +296,7 @@ class Home extends Component {
               {posts}
               {clas}
               {boletins}
+              {bondias}
               {news}
               {arubianos}
               {maintas}
