@@ -59,6 +59,8 @@ footer p {
 .nav-masthead .nav-link:hover,
 .nav-masthead .nav-link:focus {
     border-bottom-color: rgb(255, 208, 0);
+    color:white;
+    transition: color .15s ease-in-out;
 }
 .nav-masthead .nav-link:hover:before,
 .nav-masthead .nav-link:focus:before {
@@ -97,6 +99,7 @@ footer p {
 .social a,
 i:hover{
     color: rgb(255, 208, 0);
+    transition: color .15s ease-in-out
 }
 .nav{
     display: inline-flex !important;
