@@ -104,3 +104,10 @@ i:hover{
 .nav{
     display: inline-flex !important;
 }
+
+.arrow{
+    color: #3f90df;
+}
+.scroll{
+        z-index: 1 !important;
+}

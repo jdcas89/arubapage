@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
+import ScrollToTop from 'react-scroll-up'
 import Navbar from '../components/Navbar.jsx';
 import './Home.css';
 
@@ -235,7 +236,7 @@ class Home extends Component {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                         <h3>{ReactHtmlParser(focus.title.rendered)}</h3>
                         <p className="card-text">{moment(focus.date).format('L')}</p>
@@ -290,6 +291,9 @@ class Home extends Component {
                     </div>
                 </section>
             </div>
+                <ScrollToTop style={{ "z-index": '1' }} showUnder={160}>
+                    <span><i className="arrow fa fa-arrow-circle-up fa-3x"></i></span>
+                    </ScrollToTop>
              <div className="container">
               <div className="row">
               {natifes}
