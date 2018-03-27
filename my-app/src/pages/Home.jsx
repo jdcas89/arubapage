@@ -188,7 +188,7 @@ class Home extends Component {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(noticia._embedded['wp:featuredmedia'][0].code || noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/diario.PNG') : noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
                         <div className="card-body"> 
                         <h3>{ReactHtmlParser(noticia.title.rendered)}</h3>
                         <p className="card-text">{moment(noticia.date).format('L')}</p>
