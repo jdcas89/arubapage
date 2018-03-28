@@ -70,7 +70,7 @@ class Home extends Component {
                     natifes: response
                 })
             }),
-            fetch('https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://cors-anywhere.herokuapp.com/https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     blekis: response
                 })
@@ -272,7 +272,6 @@ class Home extends Component {
                     <div className="card-body">
                     <h3>{ReactHtmlParser(radio.title.rendered)}</h3>
                     <p className="card-text">{moment(radio.date).format('L')}</p>
-                    <p dangerouslySetInnerHTML={{ __html: radio.excerpt.rendered }}></p>
                     <a className="btn btn-lg btn-primary" href={radio.link} target="_blank" rel="noopener noreferrer">read more</a>
                     <div className="text-muted">provider: coolaruba.com</div>
                         </div>
@@ -291,7 +290,7 @@ class Home extends Component {
                     </div>
                 </section>
             </div>
-                <ScrollToTop style={{ "z-index": '1' }} showUnder={160}>
+                <ScrollToTop style={{ "zIndex": '1' }} showUnder={160}>
                     <span><i className="arrow fa fa-arrow-circle-up fa-3x"></i></span>
                     </ScrollToTop>
              <div className="container">
