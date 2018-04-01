@@ -1,5 +1,5 @@
 :root {
-    --jumbotron-padding-y: 3rem;
+    --jumbotron-padding-y: 2rem;
 }
 
 .jumbotron {
@@ -62,16 +62,17 @@ footer p {
     color:white;
     transition: color .15s ease-in-out;
 }
+.nav-masthead .active::before,
 .nav-masthead .nav-link:hover:before,
 .nav-masthead .nav-link:focus:before {
     content:"";
     position: absolute;
-    bottom: 9px;
+    margin-top: 21px;
     width: 77px;
     margin-left: -16px;
-    height: 0.21em;
+    height: .25rem;
     background: rgb(255, 208, 0);
-    display: block;
+    display: inherit;
 }
 
 .nav-masthead .nav-link+.nav-link {
@@ -80,7 +81,13 @@ footer p {
 
 .nav-masthead .active {
     color: #fff;
-    border-bottom-color: #fff;
+    border-bottom-color: rgb(255, 208, 0);
+}
+.nav-link {
+    display: inline !important;
+}
+.navbar-brand{
+        padding-top: 1.3125rem !important;
 }
 
 @media (min-width: 48em) {
@@ -110,4 +117,15 @@ i:hover{
 }
 .scroll{
         z-index: 1 !important;
+}
+
+.collapse.show {
+    display: block;
+    transition: inherit !important;
+    height: 40px;
+}
+#brandname{
+    float: right;
+    padding-top: 6px;
+    padding-left: 8px;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
-import ScrollToTop from 'react-scroll-up'
+import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
 import './Home.css';
 
@@ -40,12 +40,12 @@ class Home extends Component {
                     maintas: response
                 })
             }),
-            fetch('https://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://cors-anywhere.herokuapp.com/https://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     oras: response
                 })
             }),
-            fetch('https://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://cors-anywhere.herokuapp.com/https://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     boletins: response
                 })
@@ -75,7 +75,7 @@ class Home extends Component {
                     blekis: response
                 })
             }),
-            fetch('https://www.bondia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
+            fetch('https://cors-anywhere.herokuapp.com/https://www.bondia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
                 this.setState({
                     bondias: response
                 })
@@ -316,5 +316,4 @@ class Home extends Component {
         );
     }
 }
-
 export default Home;
