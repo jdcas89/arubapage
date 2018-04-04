@@ -329,13 +329,13 @@ class Home extends Component {
                 <ScrollToTop style={{ "zIndex": '1' }} showUnder={160}>
                     <span><i className="arrow fa fa-arrow-circle-up fa-3x"></i></span>
                     </ScrollToTop>
-                <Loader loaded={this.state.loaded}>
-                 <div className="container">
+                    <div className="container">
+                    <Loader loaded={this.state.loaded}>
                     <div className="row">
                         {items}
                     </div>    
+                    </Loader>
                  </div>
-                </Loader>
                 <footer className="container">
                     <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank" rel="noopener noreferrer">Site Lift NL</a></div>
                 </footer>

@@ -128,3 +128,10 @@ i:hover{
     padding-top: 6px;
     padding-left: 8px;
 }
+.loader{
+        position: absolute;
+        width: 0px;
+        z-index: 2000000000;
+        left: 50%;
+        top: 380px;
+}
