@@ -68,11 +68,10 @@ footer p {
     content:"";
     position: absolute;
     margin-top: 21px;
-    width: 77px;
-    margin-left: -16px;
+    width: 76.5px;
     height: .25rem;
     background: rgb(255, 208, 0);
-    display: inherit;
+    display: block;
 }
 
 .nav-masthead .nav-link+.nav-link {

@@ -8,6 +8,7 @@
     "react-dom": "^16.2.0",
     "react-favicon": "0.0.13",
     "react-html-parser": "^2.0.2",
+    "react-loader": "^2.4.3",
     "react-router-dom": "^4.2.2",
     "react-router-ga": "^1.0.0",
     "react-scripts": "1.1.1",

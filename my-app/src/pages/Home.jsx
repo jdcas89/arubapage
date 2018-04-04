@@ -3,12 +3,15 @@ import ReactHtmlParser from 'react-html-parser';
 import moment from 'moment';
 import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
+import Loader from 'react-loader';
 import './Home.css';
 
 class Home extends Component {
     constructor() {
         super();
         this.state = {
+            loaded:false,
+            natifes:[],
             clas:[],
             arubianos:[],
             maintas:[],
@@ -18,73 +21,91 @@ class Home extends Component {
             focuses:[],
             bondias:[],
             news:[],
-            natifes:[],
             blekis:[],
             radios:[]
         }
     }
     componentDidMount() {
-        Promise.all([
-            fetch('https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.noticiacla.com%2Frss').then((response) => response.json()).then(response => {
+             const myHeaders = new Headers();
+             myHeaders.append('pragma', 'no-cache');
+             myHeaders.append('cache-control', 'no-cache');
+             
+             const myInit = {
+                 method: 'GET',
+                 headers: myHeaders,
+                };
+                Promise.all([
+                fetch('https://cors-anywhere.herokuapp.com/https://arubanative.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        natifes: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://api.rss2json.com/v1/api.json?rss_url=http%3A%2F%2Fwww.noticiacla.com%2Frss', myInit ).then((response) => response.json()).then(response => {
+                    this.setState({
+                        clas: response.items,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://earubianonews.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        arubianos: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://awemainta.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        maintas: response
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://24ora.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
                 this.setState({
-                    clas: response.items
+                        oras: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://boletinextra.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        boletins: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://www.masnoticia.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        posts: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://www.diario.aw/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        news: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://focus.aw/index.php/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        focuses: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        blekis: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://www.bondia.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        bondias: response,
+                        loaded: true
+                    })
+                }),
+                fetch('https://cors-anywhere.herokuapp.com/https://coolaruba.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
+                    this.setState({
+                        radios: response,
+                        loaded: true
+                    })
                 })
-            }),
-            fetch('https://earubianonews.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    arubianos: response
-                })
-            }),
-            fetch('https://awemainta.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    maintas: response
-                })
-            }),
-            fetch('https://cors-anywhere.herokuapp.com/https://24ora.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    oras: response
-                })
-            }),
-            fetch('https://cors-anywhere.herokuapp.com/https://boletinextra.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    boletins: response
-                })
-            }),
-            fetch('https://www.masnoticia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    posts: response
-                })
-            }),
-            fetch('https://www.diario.aw/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    news: response
-                })
-            }),
-            fetch('https://focus.aw/index.php/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    focuses: response
-                })
-            }),
-            fetch('https://arubanative.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    natifes: response
-                })
-            }),
-            fetch('https://cors-anywhere.herokuapp.com/https://batibleki.visitaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    blekis: response
-                })
-            }),
-            fetch('https://cors-anywhere.herokuapp.com/https://www.bondia.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    bondias: response
-                })
-            }),
-            fetch('https://coolaruba.com/wp-json/wp/v2/posts?_embed').then((response) => response.json()).then(response => {
-                this.setState({
-                    radios: response
-                })
-            })
       ]);
     }
     render() {
@@ -279,6 +300,21 @@ class Home extends Component {
                 </div>
             )
         })
+
+        const items = [
+             natifes,
+             posts, 
+             clas, 
+             boletins, 
+             bondias, 
+             news, 
+             arubianos, 
+             maintas, 
+             focuses, 
+             oras, 
+             blekis, 
+             radios
+        ]
         return (
             <div>
              <Navbar />
@@ -293,22 +329,13 @@ class Home extends Component {
                 <ScrollToTop style={{ "zIndex": '1' }} showUnder={160}>
                     <span><i className="arrow fa fa-arrow-circle-up fa-3x"></i></span>
                     </ScrollToTop>
-             <div className="container">
-              <div className="row">
-              {natifes}
-              {posts}
-              {clas}
-              {boletins}
-              {bondias}
-              {news}
-              {arubianos}
-              {maintas}
-              {focuses}
-              {oras}
-              {blekis}
-              {radios}
-              </div>    
-             </div>
+                <Loader loaded={this.state.loaded}>
+                 <div className="container">
+                    <div className="row">
+                        {items}
+                    </div>    
+                 </div>
+                </Loader>
                 <footer className="container">
                     <div className="text-center text-muted"><p>© 2018 made by</p><a href="https://sitelift.nl" target="_blank" rel="noopener noreferrer">Site Lift NL</a></div>
                 </footer>
