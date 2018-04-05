@@ -22,7 +22,7 @@ class Home extends Component {
             bondias:[],
             news:[],
             blekis:[],
-            radios:[]
+            radios:[],
         }
     }
     componentDidMount() {
@@ -31,8 +31,8 @@ class Home extends Component {
              myHeaders.append('cache-control', 'no-cache');
              
              const myInit = {
-                 method: 'GET',
-                 headers: myHeaders,
+                    method: 'GET',
+                    headers: myHeaders,
                 };
                 Promise.all([
                 fetch('https://cors-anywhere.herokuapp.com/https://arubanative.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
@@ -59,7 +59,7 @@ class Home extends Component {
                     })
                 }),
                 fetch('https://cors-anywhere.herokuapp.com/https://24ora.com/wp-json/wp/v2/posts?_embed', myInit).then((response) => response.json()).then(response => {
-                this.setState({
+                    this.setState({
                         oras: response,
                         loaded: true
                     })
@@ -108,6 +108,10 @@ class Home extends Component {
                 })
       ]);
     }
+
+    myId(id) {
+        const postUrl = 'https://cors-anywhere.herokuapp.com/https://arubanative.com/wp-json/wp/v2/posts/' + id + '?_embed';
+        }
     render() {
         let clas = this.state.clas.map((cla, index) => {
             return (
@@ -205,7 +209,7 @@ class Home extends Component {
                 </div>
             )
         })
-            let news = this.state.news.map((noticia, index) => {
+        let news = this.state.news.map((noticia, index) => {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
@@ -221,22 +225,36 @@ class Home extends Component {
                     </div>
                 )
         })
-            let natifes = this.state.natifes.map((native, index) => {
-                return (
-                    <div className="col-md-4" key={index}>
-                        <div className="card mb-4 box-shadow">
-                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(native._embedded['wp:featuredmedia'][0].code) ? require('../images/arubaNative.PNG') : native._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url}  alt="Thumbnail [100%x225]" />
-                        <div className="card-body"> 
-                        <h3>{ReactHtmlParser(native.title.rendered)}</h3>
-                        <p className="card-text">{moment(native.date).format('L')}</p>
-                        <p dangerouslySetInnerHTML={{ __html: native.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={native.link} target="_blank" rel="noopener noreferrer">read more</a>
-                        <div className="text-muted">provider: arubanative.com</div>
-                         </div>
-                        </div>
+        let natifes = this.state.natifes.map((native, index) => {
+            return (
+                <div className="col-md-4" key={index}>
+                 <div className="card mb-4 box-shadow">
+                     <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(native._embedded['wp:featuredmedia'][0].code) ? require('../images/arubaNative.PNG') : native._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url}  alt="Thumbnail [100%x225]" />
+                    <div className="card-body"> 
+                     <h3>{ReactHtmlParser(native.title.rendered)}</h3>
+                     <p className="card-text">{moment(native.date).format('L')}</p>
+                     <p dangerouslySetInnerHTML={{ __html: native.excerpt.rendered }}></p>
+                     <a className="btn btn-lg btn-primary" href={native.link} target="_blank" rel="noopener noreferrer">read more</a>
+                     <div className="text-muted">provider: arubanative.com</div>
+                     {this.myId(native.id)}
+                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + native.id}>Large modal</button>
                     </div>
-                )
-            })
+                 </div>
+                    <div className="modal fade" id={native.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                     <div className="modal-dialog modal-lg">
+                        <div className="modal-content">
+                           <div className="modal-header">
+                            <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(native.title.rendered)}</h3>
+                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                             <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        </div>
+                     </div>
+                    </div>
+                </div>
+            )
+        })
         let bondias = this.state.bondias.map((bondia, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -253,7 +271,7 @@ class Home extends Component {
                 </div>
             )
         })
-            let focuses = this.state.focuses.map((focus, index) => {
+        let focuses = this.state.focuses.map((focus, index) => {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
@@ -301,7 +319,7 @@ class Home extends Component {
             )
         })
 
-        const items = [
+        const data = [
              natifes,
              posts, 
              clas, 
@@ -332,7 +350,7 @@ class Home extends Component {
                     <div className="container">
                     <Loader loaded={this.state.loaded}>
                     <div className="row">
-                        {items}
+                        {data}
                     </div>    
                     </Loader>
                  </div>
