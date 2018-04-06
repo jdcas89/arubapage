@@ -210,7 +210,7 @@ class Home extends Component {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
-                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(noticia._embedded['wp:featuredmedia'][0].code || noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/diario.PNG') : noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={( !noticia._embedded['wp:featuredmedia'] || noticia._embedded['wp:featuredmedia'][0].code || noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined ) ? require('../images/diario.PNG') : noticia._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
                         <div className="card-body"> 
                         <h3>{ReactHtmlParser(noticia.title.rendered)}</h3>
                         <p className="card-text">{moment(noticia.date).format('L')}</p>
@@ -231,9 +231,8 @@ class Home extends Component {
                      <h3>{ReactHtmlParser(native.title.rendered)}</h3>
                      <p className="card-text">{moment(native.date).format('L')}</p>
                      <p dangerouslySetInnerHTML={{ __html: native.excerpt.rendered }}></p>
-                     <a className="btn btn-lg btn-primary" href={native.link} target="_blank" rel="noopener noreferrer">read more</a>
+                     <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + native.id}>read more</button>
                      <div className="text-muted">provider: arubanative.com</div>
-                     <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + native.id}>Large modal</button>
                     </div>
                  </div>
                     <div className="modal fade" id={native.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
@@ -249,6 +248,11 @@ class Home extends Component {
                         <div className="modal-body" >
                         <p className="card-text">{moment(native.date).format('L')}</p>
                                     {ReactHtmlParser(sanitizeHtml(native.content.rendered))}
+                                    <a href="https://arubanative.com"><i style={{ color: "black" }} class="fa fa-globe" aria-hidden="true"></i> arubanative.com</a>
+                                    <a href={native.link}><i style={{ color: "black" }} target="_blank" rel="noopener noreferrer" class="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">       
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                             </div>
                         </div>
                         </div>
                      </div>
