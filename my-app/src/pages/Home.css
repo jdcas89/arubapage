@@ -135,3 +135,16 @@ i:hover{
         left: 50%;
         top: 380px;
 }
+.modal-header{
+    width: 100%;
+    display: inline-block !important;
+    object-fit: cover;
+    padding: 0 !important;
+}
+.modal-title{
+  padding: 1rem;
+}
+
+.modal-header .close {
+    padding: 2rem;
+}

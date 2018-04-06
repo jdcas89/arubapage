@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactHtmlParser from 'react-html-parser';
+import sanitizeHtml from 'sanitize-html';
 import moment from 'moment';
 import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
@@ -108,10 +109,6 @@ class Home extends Component {
                 })
       ]);
     }
-
-    myId(id) {
-        const postUrl = 'https://cors-anywhere.herokuapp.com/https://arubanative.com/wp-json/wp/v2/posts/' + id + '?_embed';
-        }
     render() {
         let clas = this.state.clas.map((cla, index) => {
             return (
@@ -236,7 +233,6 @@ class Home extends Component {
                      <p dangerouslySetInnerHTML={{ __html: native.excerpt.rendered }}></p>
                      <a className="btn btn-lg btn-primary" href={native.link} target="_blank" rel="noopener noreferrer">read more</a>
                      <div className="text-muted">provider: arubanative.com</div>
-                     {this.myId(native.id)}
                      <button type="button" className="btn btn-primary" data-toggle="modal" data-target={"#" + native.id}>Large modal</button>
                     </div>
                  </div>
@@ -244,10 +240,15 @@ class Home extends Component {
                      <div className="modal-dialog modal-lg">
                         <div className="modal-content">
                            <div className="modal-header">
+                           <img className="modal-header" src={(native._embedded['wp:featuredmedia'][0].code) ? require('../images/arubaNative.PNG') : native._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url}  alt="Thumbnail [100%x225]" />
+                           <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                           </button>
                             <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(native.title.rendered)}</h3>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                             <span aria-hidden="true">×</span>
-                            </button>
+                        </div>
+                        <div className="modal-body" >
+                        <p className="card-text">{moment(native.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(native.content.rendered))}
                         </div>
                         </div>
                      </div>
