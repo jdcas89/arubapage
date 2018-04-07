@@ -146,7 +146,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                     <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(mainta._embedded['wp:featuredmedia'] === undefined) ? require('../images/aweMainta.PNG') : mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(!mainta._embedded['wp:featuredmedia'] || mainta._embedded['wp:featuredmedia'][0].code || mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/aweMainta.PNG') : mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                             <h3>{ReactHtmlParser(mainta.title.rendered)}</h3>
                             <p className="card-text">{moment(mainta.date).format('L')}</p>
@@ -199,10 +199,32 @@ class Home extends Component {
                  <h3>{ReactHtmlParser(post.title.rendered)}</h3>
                  <p className="card-text">{moment(post.date).format('L')}</p>
                  <p dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}></p>
-                 <a className="btn btn-lg btn-primary" href={post.link} target="_blank" rel="noopener noreferrer">read more</a>
+                 <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + post.id}>read more</button>
                  <div className="text-muted">provider: masnoticia.com</div>
                    </div>
                  </div>
+                    <div className="modal fade" id={post.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={(post._embedded['wp:featuredmedia'][0].code || post._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/masnoticia.PNG') : post._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(post.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(post.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(post.content.rendered))}
+                                    <a href="https://masnoticia.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> masnoticia.com</a>
+                                    <a href={post.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         })
@@ -215,9 +237,31 @@ class Home extends Component {
                         <h3>{ReactHtmlParser(noticia.title.rendered)}</h3>
                         <p className="card-text">{moment(noticia.date).format('L')}</p>
                         <p dangerouslySetInnerHTML={{ __html: noticia.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={noticia.link} target="_blank" rel="noopener noreferrer">read more</a>
+                        <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + noticia.id}>read more</button>
                         <div className="text-muted">provider: diario.aw</div>
                          </div>
+                        </div>
+                        <div className="modal fade" id={noticia.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                            <div className="modal-dialog modal-lg">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <img className="modal-header" src={(!noticia._embedded['wp:featuredmedia'] || noticia._embedded['wp:featuredmedia'][0].code || noticia._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/diario.PNG') : noticia._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(noticia.title.rendered)}</h3>
+                                    </div>
+                                    <div className="modal-body" >
+                                        <p className="card-text">{moment(noticia.date).format('L')}</p>
+                                        {ReactHtmlParser(sanitizeHtml(noticia.content.rendered))}
+                                        <a href="https://diario.aw" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> diario.aw</a>
+                                        <a href={noticia.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 )
@@ -248,10 +292,10 @@ class Home extends Component {
                         <div className="modal-body" >
                         <p className="card-text">{moment(native.date).format('L')}</p>
                                     {ReactHtmlParser(sanitizeHtml(native.content.rendered))}
-                                    <a href="https://arubanative.com"><i style={{ color: "black" }} class="fa fa-globe" aria-hidden="true"></i> arubanative.com</a>
-                                    <a href={native.link}><i style={{ color: "black" }} target="_blank" rel="noopener noreferrer" class="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <a href="https://arubanative.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> arubanative.com</a>
+                                    <a href={native.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">       
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                              </div>
                         </div>
                         </div>
@@ -269,8 +313,30 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(bondia.title.rendered)}</h3>
                             <p className="card-text">{moment(bondia.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: bondia.excerpt.rendered }}></p>
-                            <a className="btn btn-lg btn-primary" href={bondia.link} target="_blank" rel="noopener noreferrer">read more</a>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + bondia.id}>read more</button>
                             <div className="text-muted">provider: bondia.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={bondia.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={bondia._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(bondia.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(bondia.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(bondia.content.rendered))}
+                                    <a href="https://www.bondia.com/" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> bondia.com</a>
+                                    <a href={bondia.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -285,8 +351,37 @@ class Home extends Component {
                         <h3>{ReactHtmlParser(focus.title.rendered)}</h3>
                         <p className="card-text">{moment(focus.date).format('L')}</p>
                         <p dangerouslySetInnerHTML={{ __html: focus.excerpt.rendered }}></p>
-                        <a className="btn btn-lg btn-primary" href={focus.link} target="_blank" rel="noopener noreferrer">read more</a>
+                        <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + focus.id}>read more</button>
                         <div className="text-muted">provider: focus.aw</div>
+                            </div>
+                        </div>
+                        <div className="modal fade" id={focus.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                            <div className="modal-dialog modal-lg">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <img className="modal-header" src={(focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                        <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(focus.title.rendered)}</h3>
+                                    </div>
+                                    <div className="modal-body" >
+                                        <p className="card-text">{moment(focus.date).format('L')}</p>
+                                        {ReactHtmlParser(sanitizeHtml(focus.content.rendered, {
+                                            allowedTags: ['p', 'em', 'strong', 'iframe'],
+                                            allowedAttributes: { 'iframe': ['src'] },
+                                            allowedClasses: {
+                                                'p': ['fancy', 'simple']
+                                            },
+                                            allowedIframeHostnames: ['www.youtube.com', 'player.vimeo.com']
+                                        }))}
+                                        <a href="https://focus.aw" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> focus.aw</a>
+                                        <a href={focus.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                        <div className="modal-footer">
+                                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
