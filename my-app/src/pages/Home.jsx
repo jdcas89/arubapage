@@ -110,6 +110,7 @@ class Home extends Component {
       ]);
     }
     render() {
+        // noticia cla
         let clas = this.state.clas.map((cla, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -119,13 +120,36 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(cla.title)}</h3>
                             <p className="card-text">{moment(cla.pubDate).format('L')}</p>
                             <p>{ReactHtmlParser(cla.description.substring(0, 250) + "...")}</p>
-                            <a className="btn btn-lg btn-primary" href={cla.link} target="_blank">read more</a>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + cla.link}>read more</button>
                             <div className="text-muted">provider: noticiacla.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={cla.link} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={require('../images/noticiaCLa.PNG')} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(cla.title)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(cla.pubDate).format('L')}</p>
+                                    <div>{ReactHtmlParser(sanitizeHtml(cla.content))}</div>
+                                    <a href="https://noticiacla.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> noticiacla.com</a>
+                                    <a href={cla.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        // e arubiano
         let arubianos = this.state.arubianos.map((arubiano, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -135,13 +159,36 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(arubiano.title.rendered)}</h3>
                             <p className="card-text">{moment(arubiano.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: arubiano.excerpt.rendered.substring(0, 250) + "..."}}></p>
-                            <a className="btn btn-lg btn-primary" href={arubiano.link} target="_blank">read more</a>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + arubiano.id}>read more</button>
                             <div className="text-muted">provider: earubianonews.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={arubiano.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={require('../images/eArubiano.PNG')} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(arubiano.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(arubiano.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(arubiano.content.rendered))}
+                                    <a href="https://earubianonews.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> earubianonews.com</a>
+                                    <a href={arubiano.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        //awe mainta
         let maintas = this.state.maintas.map((mainta, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -151,13 +198,36 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(mainta.title.rendered)}</h3>
                             <p className="card-text">{moment(mainta.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: mainta.excerpt.rendered }}></p>
-                            <a className="btn btn-lg btn-primary" href={mainta.link} target="_blank">read more</a>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + mainta.id}>read more</button>
                             <div className="text-muted">provider: awemainta.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={mainta.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={(!mainta._embedded['wp:featuredmedia'] || mainta._embedded['wp:featuredmedia'][0].code || mainta._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/aweMainta.PNG') : mainta._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(mainta.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(mainta.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(mainta.content.rendered))}
+                                    <a href="https://awemainta.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> awemainta.com</a>
+                                    <a href={mainta.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        //boletin extra
         let boletins = this.state.boletins.map((boletin, index) => {
             return ( 
                 <div className="col-md-4" key={index}>
@@ -167,13 +237,38 @@ class Home extends Component {
                     <h3>{ReactHtmlParser(boletin.title.rendered)}</h3>
                     <p className="card-text">{moment( boletin.date).format('L')}</p>
                     <p dangerouslySetInnerHTML={{ __html:  boletin.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={ boletin.link} target="_blank">read more</a>
+                    <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + boletin.id}>read more</button>
                     <div className="text-muted">provider: boletinextra.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={boletin.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={require('../images/boletinHD.jpg')} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(boletin.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(boletin.date).format('L')}</p>
+                                    <div>{ReactHtmlParser(sanitizeHtml(boletin.content.rendered, {
+                                        allowedTags: ['p', 'em', 'strong', 'b', 'i']
+                                    }))}</div>
+                                    <a href="https://boletinextra.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> boletinextra.com</a>
+                                    <a href={boletin.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        //24ora
         let oras = this.state.oras.map((ora, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -182,14 +277,46 @@ class Home extends Component {
                     <div className="card-body">
                     <h3>{ReactHtmlParser(ora.title.rendered)}</h3>
                     <p className="card-text">{moment(ora.date).format('L')}</p>
-                    <p dangerouslySetInnerHTML={{ __html: ora.excerpt.rendered }}></p>
-                    <a className="btn btn-lg btn-primary" href={ora.link} target="_blank" rel="noopener noreferrer">read more</a>
+                            <div>{(ora.excerpt.rendered === "<p>00</p>\n") ? 'Video' : ReactHtmlParser(ora.excerpt.rendered)}</div>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + ora.id}>read more</button>
                     <div className="text-muted">provider: 24ora.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={ora.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={require('../images/24ora.jpg')} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(ora.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(ora.date).format('L')}</p>
+                                    <div>{ReactHtmlParser(sanitizeHtml(ora.content.rendered, {
+                                        allowedTags: ['p', 'em', 'strong', 'b', 'i', 'span'],
+                                        transformTags: {
+                                            'span': function (tagName, attribs) {
+                                                return {
+                                                    tagName: 'span',
+                                                    text: ' '
+                                                };
+                                            }
+                                    }}))}</div>
+                                    <a href="https://24ora.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> 24ora.com</a>
+                                    <a href={ora.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        //masnoticia
         let posts = this.state.posts.map((post, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -228,6 +355,7 @@ class Home extends Component {
                 </div>
             )
         })
+        //diario
         let news = this.state.news.map((noticia, index) => {
                 return (
                     <div className="col-md-4" key={index}>
@@ -266,6 +394,7 @@ class Home extends Component {
                     </div>
                 )
         })
+        //aruba native
         let natifes = this.state.natifes.map((native, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -304,6 +433,7 @@ class Home extends Component {
                 </div>
             )
         })
+        //bon dia aruba
         let bondias = this.state.bondias.map((bondia, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -342,6 +472,7 @@ class Home extends Component {
                 </div>
             )
         })
+        //focus
         let focuses = this.state.focuses.map((focus, index) => {
                 return (
                     <div className="col-md-4" key={index}>
@@ -367,14 +498,10 @@ class Home extends Component {
                                     </div>
                                     <div className="modal-body" >
                                         <p className="card-text">{moment(focus.date).format('L')}</p>
-                                        {ReactHtmlParser(sanitizeHtml(focus.content.rendered, {
-                                            allowedTags: ['p', 'em', 'strong', 'iframe'],
+                                        <div>{ReactHtmlParser(sanitizeHtml(focus.content.rendered, {
                                             allowedAttributes: { 'iframe': ['src'] },
-                                            allowedClasses: {
-                                                'p': ['fancy', 'simple']
-                                            },
                                             allowedIframeHostnames: ['www.youtube.com', 'player.vimeo.com']
-                                        }))}
+                                        }))}</div>
                                         <a href="https://focus.aw" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> focus.aw</a>
                                         <a href={focus.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                         <div className="modal-footer">
@@ -387,6 +514,7 @@ class Home extends Component {
                     </div>
                 )
             })
+        //bati bleki    
         let blekis = this.state.blekis.map((bleki, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -396,13 +524,36 @@ class Home extends Component {
                             <h3>{ReactHtmlParser(bleki.title.rendered)}</h3>
                             <p className="card-text">{moment(bleki.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: bleki.excerpt.rendered.substring(0, 250) + "..."}}></p>
-                            <a className="btn btn-lg btn-primary" href={bleki.link} target="_blank" rel="noopener noreferrer">read more</a>
+                            <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + bleki.id}>read more</button>
                             <div className="text-muted">provider: batibleki.visitaruba.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={bleki.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={(!bleki._embedded['wp:featuredmedia'] || bleki._embedded['wp:featuredmedia'][0].code) ? require('../images/batiBlekiHD.PNG') : bleki._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(bleki.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(bleki.date).format('L')}</p>
+                                    {ReactHtmlParser(sanitizeHtml(bleki.content.rendered))}
+                                    <a href="https://batibleki.visitaruba.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> batibleki.visitaruba.com</a>
+                                    <a href={bleki.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             )
         })
+        //coolaruba
         let radios = this.state.radios.map((radio, index) => {
             return (
                 <div className="col-md-4" key={index}>
@@ -411,8 +562,32 @@ class Home extends Component {
                     <div className="card-body">
                     <h3>{ReactHtmlParser(radio.title.rendered)}</h3>
                     <p className="card-text">{moment(radio.date).format('L')}</p>
-                    <a className="btn btn-lg btn-primary" href={radio.link} target="_blank" rel="noopener noreferrer">read more</a>
+                    <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + radio.id}>read more</button>
                     <div className="text-muted">provider: coolaruba.com</div>
+                        </div>
+                    </div>
+                    <div className="modal fade" id={radio.id} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" >
+                        <div className="modal-dialog modal-lg">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <img className="modal-header" src={radio._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                    <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                    <h3 className="modal-title" id="exampleModalCenterTitle">{ReactHtmlParser(radio.title.rendered)}</h3>
+                                </div>
+                                <div className="modal-body" >
+                                    <p className="card-text">{moment(radio.date).format('L')}</p>
+                                    <div>{ReactHtmlParser(sanitizeHtml(radio.content.rendered, {
+                                        allowedTags: ['p', 'em', 'strong', 'b', 'i']
+                                    }))}</div>
+                                    <a href="https://coolaruba.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> coolaruba.com</a>
+                                    <a href={radio.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
