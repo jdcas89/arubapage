@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import Navbar from '../components/Navbar.jsx';
 import Loader from 'react-loader';
+import ScrollToTop from 'react-scroll-up';
 
 class About extends Component {
 
@@ -90,6 +91,9 @@ return (
                 <div className="container">
                     <h1 className="jumbotron-heading">About ArubaPage.com</h1>
                     <p className="lead text-muted">One Happy Island, One well informed Aruban.</p>
+                    <ScrollToTop style={{ "zIndex": '1' }} showUnder={160}>
+                        <span><i className="arrow fa fa-arrow-circle-up fa-3x"></i></span>
+                    </ScrollToTop>
                     <p className="lead font-weight-normal">
 
                     Aruba page dot com was launched on the 18th of March 2018 and was created by Site Lift NL.<br/><br/>
