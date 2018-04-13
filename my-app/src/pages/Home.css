@@ -148,3 +148,12 @@ i:hover{
 .modal-header .close {
     padding: 2rem;
 }
+
+.sharebuttons{
+        display: inline-flex;
+        margin: auto !important;
+        cursor: pointer;
+}
+.SocialMediaShareButton{
+    margin-left:10px;
+}

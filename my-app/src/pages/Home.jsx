@@ -5,6 +5,13 @@ import moment from 'moment';
 import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
 import Loader from 'react-loader';
+import {
+    FacebookShareButton, 
+    TwitterShareButton, 
+    WhatsappShareButton, 
+    FacebookIcon,
+    TwitterIcon,
+    WhatsappIcon,} from 'react-share';
 import './Home.css';
 
 class Home extends Component {
@@ -140,6 +147,17 @@ class Home extends Component {
                                     <a href="https://noticiacla.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> noticiacla.com</a>
                                     <a href={cla.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                    <div className="sharebuttons">
+                                        <FacebookShareButton url={cla.link}>
+                                            <FacebookIcon size={32} round={true} />
+                                        </FacebookShareButton>
+                                        <TwitterShareButton url={cla.link}>
+                                            <TwitterIcon size={32} round={true} />
+                                        </TwitterShareButton>
+                                        <WhatsappShareButton url={cla.link}>
+                                            <WhatsappIcon size={32} round={true} />
+                                        </WhatsappShareButton>
+                                    </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -179,6 +197,17 @@ class Home extends Component {
                                     <a href="https://earubianonews.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> earubianonews.com</a>
                                     <a href={arubiano.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={arubiano.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={arubiano.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={arubiano.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -195,7 +224,7 @@ class Home extends Component {
                     <div className="card mb-4 box-shadow">
                         <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(!mainta._embedded['wp:featuredmedia'] || mainta._embedded['wp:featuredmedia'][0].code || mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/aweMainta.PNG') : mainta._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url } alt="Thumbnail [100%x225]" />
                         <div className="card-body">
-                            <h3>{ReactHtmlParser(mainta.title.rendered)}</h3>
+                            <h3>{ReactHtmlParser(mainta.title.rendered.substring(0, 170))}</h3>
                             <p className="card-text">{moment(mainta.date).format('L')}</p>
                             <p dangerouslySetInnerHTML={{ __html: mainta.excerpt.rendered }}></p>
                             <button type="button" className="btn btn-lg btn-primary" data-toggle="modal" data-target={"#" + mainta.id}>read more</button>
@@ -218,6 +247,17 @@ class Home extends Component {
                                     <a href="https://awemainta.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> awemainta.com</a>
                                     <a href={mainta.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={mainta.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={mainta.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={mainta.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -259,6 +299,17 @@ class Home extends Component {
                                     <a href="https://boletinextra.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> boletinextra.com</a>
                                     <a href={boletin.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={boletin.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={boletin.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={boletin.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -307,6 +358,17 @@ class Home extends Component {
                                     <a href="https://24ora.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> 24ora.com</a>
                                     <a href={ora.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={ora.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={ora.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={ora.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -346,6 +408,17 @@ class Home extends Component {
                                     <a href="https://masnoticia.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> masnoticia.com</a>
                                     <a href={post.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={post.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={post.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={post.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -385,6 +458,17 @@ class Home extends Component {
                                         <a href="https://diario.aw" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> diario.aw</a>
                                         <a href={noticia.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                         <div className="modal-footer">
+                                            <div className="sharebuttons">
+                                                <FacebookShareButton url={noticia.link}>
+                                                    <FacebookIcon size={32} round={true} />
+                                                </FacebookShareButton>
+                                                <TwitterShareButton url={noticia.link}>
+                                                    <TwitterIcon size={32} round={true} />
+                                                </TwitterShareButton>
+                                                <WhatsappShareButton url={noticia.link}>
+                                                    <WhatsappIcon size={32} round={true} />
+                                                </WhatsappShareButton>
+                                            </div>
                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -420,10 +504,23 @@ class Home extends Component {
                         </div>
                         <div className="modal-body" >
                         <p className="card-text">{moment(native.date).format('L')}</p>
-                                    {ReactHtmlParser(sanitizeHtml(native.content.rendered))}
+                                    {ReactHtmlParser(sanitizeHtml(native.content.rendered, {
+                                        allowedTags: ['p', 'em', 'strong', 'b', 'i']
+                                    }))}
                                     <a href="https://arubanative.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> arubanative.com</a>
                                     <a href={native.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
-                                    <div className="modal-footer">       
+                                    <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={native.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={native.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={native.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div>       
                                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                              </div>
                         </div>
@@ -463,6 +560,17 @@ class Home extends Component {
                                     <a href="https://www.bondia.com/" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> bondia.com</a>
                                     <a href={bondia.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={bondia.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={bondia.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={bondia.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div> 
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -477,7 +585,7 @@ class Home extends Component {
                 return (
                     <div className="col-md-4" key={index}>
                         <div className="card mb-4 box-shadow">
-                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={(focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
+                            <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={( !focus._embedded['wp:featuredmedia'] || focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.medium.source_url} alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                         <h3>{ReactHtmlParser(focus.title.rendered)}</h3>
                         <p className="card-text">{moment(focus.date).format('L')}</p>
@@ -490,7 +598,7 @@ class Home extends Component {
                             <div className="modal-dialog modal-lg">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <img className="modal-header" src={(focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
+                                        <img className="modal-header" src={( !focus._embedded['wp:featuredmedia'] || focus._embedded['wp:featuredmedia'][0].code || focus._embedded['wp:featuredmedia'][0].media_details.sizes.full === undefined) ? require('../images/focus.PNG') : focus._embedded['wp:featuredmedia'][0].media_details.sizes.full.source_url} alt="Thumbnail [100%x225]" />
                                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
@@ -499,12 +607,24 @@ class Home extends Component {
                                     <div className="modal-body" >
                                         <p className="card-text">{moment(focus.date).format('L')}</p>
                                         <div>{ReactHtmlParser(sanitizeHtml(focus.content.rendered, {
+                                            allowedTags: ['p', 'li', 'iframe', 'i', 'strong','blockquote'],
                                             allowedAttributes: { 'iframe': ['src'] },
                                             allowedIframeHostnames: ['www.youtube.com', 'player.vimeo.com']
                                         }))}</div>
                                         <a href="https://focus.aw" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> focus.aw</a>
                                         <a href={focus.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                         <div className="modal-footer">
+                                            <div className="sharebuttons">
+                                                <FacebookShareButton url={focus.link}>
+                                                    <FacebookIcon size={32} round={true} />
+                                                </FacebookShareButton>
+                                                <TwitterShareButton url={focus.link}>
+                                                    <TwitterIcon size={32} round={true} />
+                                                </TwitterShareButton>
+                                                <WhatsappShareButton url={focus.link}>
+                                                    <WhatsappIcon size={32} round={true} />
+                                                </WhatsappShareButton>
+                                            </div> 
                                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                         </div>
                                     </div>
@@ -544,6 +664,17 @@ class Home extends Component {
                                     <a href="https://batibleki.visitaruba.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> batibleki.visitaruba.com</a>
                                     <a href={bleki.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={bleki.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={bleki.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={bleki.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div> 
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -584,6 +715,17 @@ class Home extends Component {
                                     <a href="https://coolaruba.com" target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-globe" aria-hidden="true"></i> coolaruba.com</a>
                                     <a href={radio.link} target="_blank" rel="noopener noreferrer"><i style={{ color: "black" }} className="fa fa-link" aria-hidden="true"></i> link to article</a>
                                     <div className="modal-footer">
+                                        <div className="sharebuttons">
+                                            <FacebookShareButton url={radio.link}>
+                                                <FacebookIcon size={32} round={true} />
+                                            </FacebookShareButton>
+                                            <TwitterShareButton url={radio.link}>
+                                                <TwitterIcon size={32} round={true} />
+                                            </TwitterShareButton>
+                                            <WhatsappShareButton url={radio.link}>
+                                                <WhatsappIcon size={32} round={true} />
+                                            </WhatsappShareButton>
+                                        </div> 
                                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div>
@@ -628,7 +770,7 @@ class Home extends Component {
                         {data}
                     </div>    
                     </Loader>
-                    <p className="lead font-weight-normal">
+                    <p style={{"marginTop": "60px", "padding":"10%"}} className="lead font-weight-normal">
                         It is with great pleasure that we proudly present to you our solution for the island of <b>Aruba</b> regarding online news.<br /><br/>
                         This web app allows you to see all the latest news from all online news providers from the island.
                         Instead of going on news sites one by one or finding out about the news on Facebook or other social media,
