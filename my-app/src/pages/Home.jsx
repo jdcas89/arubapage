@@ -5,6 +5,7 @@ import moment from 'moment';
 import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
 import Loader from 'react-loader';
+import ogs from 'open-graph-scraper';
 import {
     FacebookShareButton, 
     TwitterShareButton, 
@@ -14,6 +15,18 @@ import {
     WhatsappIcon,} from 'react-share';
 import './Home.css';
 
+
+function imgUrl(url) {
+    const options = { 'url': 'https://cors-anywhere.herokuapp.com/' + url }
+    ogs(options)
+        .then(function (result) {
+            console.log(result.data.ogImage.url);
+            return true;
+        })
+        .catch(function (error) {
+            console.log('error:', error);
+        })
+}
 class Home extends Component {
     constructor() {
         super();
@@ -30,9 +43,10 @@ class Home extends Component {
             bondias:[],
             news:[],
             blekis:[],
-            radios:[],
+            radios:[]
         }
     }
+
     componentDidMount() {
              const myHeaders = new Headers();
              myHeaders.append('pragma', 'no-cache');
@@ -122,7 +136,7 @@ class Home extends Component {
             return (
                 <div className="col-md-4" key={index}>
                     <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={require('../images/noticiaCLa.PNG')} alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={imgUrl(cla.link)} alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                             <h3>{ReactHtmlParser(cla.title)}</h3>
                             <p className="card-text">{moment(cla.pubDate).format('L')}</p>
