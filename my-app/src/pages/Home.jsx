@@ -6,6 +6,7 @@ import ScrollToTop from 'react-scroll-up';
 import Navbar from '../components/Navbar.jsx';
 import Loader from 'react-loader';
 import ogs from 'open-graph-scraper';
+import _ from 'lodash'
 import {
     FacebookShareButton, 
     TwitterShareButton, 
@@ -16,17 +17,6 @@ import {
 import './Home.css';
 
 
-function imgUrl(url) {
-    const options = { 'url': 'https://cors-anywhere.herokuapp.com/' + url }
-    ogs(options)
-        .then(function (result) {
-            console.log(result.data.ogImage.url);
-            return true;
-        })
-        .catch(function (error) {
-            console.log('error:', error);
-        })
-}
 class Home extends Component {
     constructor() {
         super();
@@ -130,13 +120,35 @@ class Home extends Component {
                 })
       ]);
     }
+
+    mapOpenGraphImageResults = function(url, index) {
+        if(this.state.clas.length > 0){
+            let noticiaCla = _.cloneDeep(this.state.clas);
+            let done = _.after(noticiaCla.length, () => {
+                this.setState({
+                    clas: noticiaCla
+                });
+            })
+            noticiaCla.map((cla, index) => {
+                const options = { 'url': 'https://cors-anywhere.herokuapp.com/' + cla.link }
+                ogs(options)
+                    .then(function (result) {
+                        cla.imgUrl = result.data.ogImage.url;
+                        done();
+                    })
+                    .catch(function (error) {
+                        console.log('error:', error);
+                    })  
+            })
+        }
+    }
     render() {
-        // noticia cla
+        this.mapOpenGraphImageResults();
         let clas = this.state.clas.map((cla, index) => {
             return (
                 <div className="col-md-4" key={index}>
                     <div className="card mb-4 box-shadow">
-                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={imgUrl(cla.link)} alt="Thumbnail [100%x225]" />
+                        <img className="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" src={cla.imgUrl} alt="Thumbnail [100%x225]" />
                         <div className="card-body">
                             <h3>{ReactHtmlParser(cla.title)}</h3>
                             <p className="card-text">{moment(cla.pubDate).format('L')}</p>
